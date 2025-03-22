@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fill out the form for a free guide!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('your-uploaded-background.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+        h2 {
+            font-style: normal;  
+            font-weight: 600;
+            color: #e96b25;    
+            text-align: left; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;                                             
+        }
+        .form-container {
+            max-width: 475px;
+            margin: 50px auto;
+            padding: 46px;
+            padding-left: 46px;
+            padding-right: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            background-color: #777777;
+            border-radius: 8px;
+        }
+        .logo {
+            display: block;
+            padding-top: 50px;
+            margin: 0 auto 20px;
+            width: 150px;
+        }
+        input, button {
+            width: 100%;
+            height: 25px;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+        }
+        input {
+            background: white;
+            color: black;
+        }
+        .gdlr {
+            text-align: left;
+            font-size: 16px;
+            font-style: italic;
+            color:#ff6600;
+            display: block;
+            margin-bottom: 10px;
+        }
+        button {
+            background:#e96b25;
+            width: 495px;
+            height: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://epicorprophet21consultants.com/wp-content/uploads/2024/07/EPCLOGO.jpg" alt="Company Logo" class="logo">
+    <div class="form-container">
+        <span class="gdlr">Get Contact</span>
+        <h2>Fill out the form for a free guide!</h2>
+        <form id="leadForm">
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="tel" id="phone" name="phone" placeholder="Mobile Number" required>
+            <input type="hidden" id="utm_source" name="utm_source" value="google_ads">
+            <button type="submit">GET IN TOUCH</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("leadForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let formData = {
+                "data": [{
+                    "Last_Name": document.getElementById("name").value,
+                    "Email": document.getElementById("email").value,
+                    "Phone": document.getElementById("phone").value,
+                    "Lead_Source": "Website"
+                }]
+            };
+            fetch("https://www.zohoapis.com/crm/v2/Leads", {
+                method: "POST",
+                headers: {
+                    "Authorization": " ",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Lead submitted successfully!");
+                document.getElementById("leadForm").reset();
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Failed to submit lead.");
+            });
+        });
+    </script>
+</body>
+</html>
